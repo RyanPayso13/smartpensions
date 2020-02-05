@@ -1,6 +1,6 @@
 import { gameReducer } from "./gameReducer";
 import * as ACTION_TYPES from "../actions/actionTypes";
-import * as CONSTANTS from "../../constants/index";
+import * as constants from "../../constants/index";
 
 describe("Game reducer", () => {
   it("should return the initial state", () => {
@@ -26,7 +26,7 @@ describe("Game reducer", () => {
   });
 
   it("should set the selected resource", () => {
-    const payload = CONSTANTS.RESOURCE_LIST[0].name;
+    const payload = constants.RESOURCE_LIST[0].name;
     expect(
       gameReducer(
         {
@@ -37,6 +37,6 @@ describe("Game reducer", () => {
           payload: payload
         }
       )
-    ).toEqual({ selectedResource: CONSTANTS.RESOURCE_LIST[0].name });
+    ).toEqual({ selectedResource: constants.RESOURCE_LIST[0].name });
   });
 });

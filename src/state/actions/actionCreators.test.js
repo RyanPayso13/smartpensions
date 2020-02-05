@@ -1,6 +1,6 @@
 import * as ACTION_TYPES from "./actionTypes";
 import * as actions from "./actionCreators";
-import * as CONSTANTS from "../../constants/index";
+import * as constants from "../../constants/index";
 
 describe("Action Creators", () => {
   it("should initiate the game", () => {
@@ -13,7 +13,7 @@ describe("Action Creators", () => {
   });
 
   it("should set the selected resource", () => {
-    const payload = CONSTANTS.RESOURCE_LIST[0].name;
+    const payload = constants.RESOURCE_LIST[0].name;
     const expectedAction = {
       type: ACTION_TYPES.SET_SELECTED_RESOURCE,
       payload
