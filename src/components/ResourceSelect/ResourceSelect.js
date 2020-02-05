@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -9,19 +9,21 @@ import * as actions from "../../state/actions/actionCreators";
 
 const ResourceSelect = () => {
   const { dispatch } = useContext(Context);
+  const selectEl = useRef(null);
   const [isDisabled, setIsDisabled] = useState(true);
   const handleOnChange = event => setIsDisabled(event.target.value === "");
   const handleSubmit = event => {
     event.preventDefault();
     event.stopPropagation();
-    return dispatch(actions.initiateGame(true));
+    dispatch(actions.initiateGame(true));
+    dispatch(actions.setSelectedResource(selectEl.current.value));
   };
 
   return (
     <Form data-testid="resource-form" onSubmit={handleSubmit}>
       <Form.Row>
         <Form.Group as={Col} controlId="formGridState">
-          <Form.Control as="select" onChange={handleOnChange}>
+          <Form.Control as="select" ref={selectEl} onChange={handleOnChange}>
             <option value="">Please select...</option>
             {constants.RESOURCE_LIST.length > 0 &&
               constants.RESOURCE_LIST.map((resource, index) => {

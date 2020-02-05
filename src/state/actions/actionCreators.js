@@ -6,3 +6,10 @@ export function initiateGame(data = false) {
     payload: data
   };
 }
+
+export function setSelectedResource(data = null) {
+  return {
+    type: ACTION_TYPES.SET_SELECTED_RESOURCE,
+    payload: data
+  };
+}

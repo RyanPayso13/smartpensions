@@ -1,9 +1,13 @@
 import { gameReducer } from "./gameReducer";
 import * as ACTION_TYPES from "../actions/actionTypes";
+import * as CONSTANTS from "../../constants/index";
 
 describe("Game reducer", () => {
   it("should return the initial state", () => {
-    expect(gameReducer()).toEqual({ isGameInitiated: false });
+    expect(gameReducer()).toEqual({
+      isGameInitiated: false,
+      selectedResource: null
+    });
   });
 
   it("should initiate the game", () => {
@@ -19,5 +23,20 @@ describe("Game reducer", () => {
         }
       )
     ).toEqual({ isGameInitiated: true });
+  });
+
+  it("should set the selected resource", () => {
+    const payload = CONSTANTS.RESOURCE_LIST[0].name;
+    expect(
+      gameReducer(
+        {
+          selectedResource: null
+        },
+        {
+          type: ACTION_TYPES.SET_SELECTED_RESOURCE,
+          payload: payload
+        }
+      )
+    ).toEqual({ selectedResource: CONSTANTS.RESOURCE_LIST[0].name });
   });
 });

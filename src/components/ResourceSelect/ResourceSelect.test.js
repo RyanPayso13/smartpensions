@@ -76,10 +76,14 @@ describe("Submit button", () => {
     });
     fireEvent.click(submit);
     expect(dispatch).toHaveBeenCalled();
-    expect(dispatch).toHaveBeenCalledTimes(1);
-    expect(dispatch).toHaveBeenCalledWith({
+    expect(dispatch).toHaveBeenCalledTimes(2);
+    expect(dispatch).toHaveBeenNthCalledWith(1, {
       payload: true,
       type: ACTION_TYPES.INITIATE_GAME
+    });
+    expect(dispatch).toHaveBeenLastCalledWith({
+      payload: constants.RESOURCE_LIST[0].name,
+      type: ACTION_TYPES.SET_SELECTED_RESOURCE
     });
   });
 });
