@@ -4,8 +4,8 @@ export const initialState = {
   gameCounter: 0,
   selectedResource: null,
   players: [
-    { id: 1, winCount: 0 },
-    { id: 2, winCount: 0 }
+    { id: 1, winCount: 0, topTrump: null },
+    { id: 2, winCount: 0, topTrump: null }
   ]
 };
 
@@ -22,11 +22,25 @@ export const gameReducer = (state = initialState, action = "") => {
         selectedResource: action.payload
       };
     case ACTION_TYPES.INCREMENT_WIN_COUNT_BY_PLAYER_ID:
-      const updated = state.players.map(player => {
-        if (player.id === action.payload.id) {
+      let result = [...state.players].map(player => {
+        if (player.id === action.payload) {
           return {
             ...player,
             winCount: player.winCount + 1
+          };
+        }
+        return player;
+      });
+      return {
+        ...state,
+        players: result
+      };
+    case ACTION_TYPES.SET_TOP_TRUMP_BY_PLAYER_ID:
+      let updated = [...state.players].map(player => {
+        if (player.id === action.payload.id) {
+          return {
+            ...player,
+            topTrump: action.payload.topTrump
           };
         }
         return player;

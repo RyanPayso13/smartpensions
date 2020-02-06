@@ -23,7 +23,7 @@ const PlayerCard = ({ id = null, winCount = 0 }) => {
         </Container>
       </Card.Header>
       <Card.Body>
-        <TopTrump />
+        <TopTrump id={id} />
       </Card.Body>
     </Card>
   );

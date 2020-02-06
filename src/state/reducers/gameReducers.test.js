@@ -8,8 +8,8 @@ describe("Game reducer", () => {
       gameCounter: 0,
       selectedResource: null,
       players: [
-        { id: 1, winCount: 0 },
-        { id: 2, winCount: 0 }
+        { id: 1, winCount: 0, topTrump: null },
+        { id: 2, winCount: 0, topTrump: null }
       ]
     });
   });
@@ -53,15 +53,38 @@ describe("Game reducer", () => {
         },
         {
           type: ACTION_TYPES.INCREMENT_WIN_COUNT_BY_PLAYER_ID,
-          payload: {
-            id: 1
-          }
+          payload: 1
         }
       )
     ).toEqual({
       players: [
         { id: 1, winCount: 1 },
         { id: 2, winCount: 0 }
+      ]
+    });
+  });
+
+  it("should set the top trump by player ID", () => {
+    expect(
+      gameReducer(
+        {
+          players: [
+            { id: 1, winCount: 0, topTrump: null },
+            { id: 2, winCount: 0, topTrump: null }
+          ]
+        },
+        {
+          type: ACTION_TYPES.SET_TOP_TRUMP_BY_PLAYER_ID,
+          payload: {
+            id: 1,
+            topTrump: { name: "Yoda", height: 90 }
+          }
+        }
+      )
+    ).toEqual({
+      players: [
+        { id: 1, winCount: 0, topTrump: { name: "Yoda", height: 90 } },
+        { id: 2, winCount: 0, topTrump: null }
       ]
     });
   });

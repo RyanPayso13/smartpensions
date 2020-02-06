@@ -31,4 +31,20 @@ describe("Action Creators", () => {
     };
     expect(actions.incrementWinCount(payload)).toEqual(expectedAction);
   });
+
+  it("should set the current top trump for the player", () => {
+    const payload = {
+      id: 1,
+      topTrump: {
+        name: "Luke Skywalker",
+        height: 186,
+        mass: 85
+      }
+    };
+    const expectedAction = {
+      type: ACTION_TYPES.SET_TOP_TRUMP_BY_PLAYER_ID,
+      payload
+    };
+    expect(actions.setTopTrump(payload)).toEqual(expectedAction);
+  });
 });

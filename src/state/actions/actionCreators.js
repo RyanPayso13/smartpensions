@@ -14,9 +14,16 @@ export function setSelectedResource(data = null) {
   };
 }
 
-export function incrementWinCount(data = { id: 0 }) {
+export function incrementWinCount(data = 0) {
   return {
     type: ACTION_TYPES.INCREMENT_WIN_COUNT_BY_PLAYER_ID,
+    payload: data
+  };
+}
+
+export function setTopTrump(data = null) {
+  return {
+    type: ACTION_TYPES.SET_TOP_TRUMP_BY_PLAYER_ID,
     payload: data
   };
 }
