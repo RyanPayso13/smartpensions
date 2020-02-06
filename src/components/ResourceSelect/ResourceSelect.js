@@ -28,7 +28,7 @@ const ResourceSelect = () => {
           <Form.Control as="select" ref={selectEl} onChange={handleOnChange}>
             <option value="">Please select...</option>
             {constants.RESOURCE_LIST.length > 0 &&
-              constants.RESOURCE_LIST.map((resource, index) => {
+              [...constants.RESOURCE_LIST].map((resource, index) => {
                 return (
                   <option key={index} value={resource.name}>
                     {resource.name}
