@@ -11,11 +11,13 @@ const ResourceSelect = () => {
   const { dispatch } = useContext(Context);
   const selectEl = useRef(null);
   const [isDisabled, setIsDisabled] = useState(true);
-  const handleOnChange = event => setIsDisabled(event.target.value === "");
+  const handleOnChange = event => {
+    setIsDisabled(event.target.value === "");
+  };
   const handleSubmit = event => {
     event.preventDefault();
     event.stopPropagation();
-    dispatch(actions.initiateGame(true));
+    dispatch(actions.incrementGameCount());
     dispatch(actions.setSelectedResource(selectEl.current.value));
   };
 

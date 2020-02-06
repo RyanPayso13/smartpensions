@@ -5,24 +5,26 @@ import * as constants from "../../constants/index";
 describe("Game reducer", () => {
   it("should return the initial state", () => {
     expect(gameReducer()).toEqual({
-      isGameInitiated: false,
-      selectedResource: null
+      gameCounter: 0,
+      selectedResource: null,
+      players: [
+        { id: 1, winCount: 0 },
+        { id: 2, winCount: 0 }
+      ]
     });
   });
 
-  it("should initiate the game", () => {
-    const payload = true;
+  it("should increment the game counter", () => {
     expect(
       gameReducer(
         {
-          isGameInitiated: false
+          gameCounter: 0
         },
         {
-          type: ACTION_TYPES.INITIATE_GAME,
-          payload: payload
+          type: ACTION_TYPES.INCREMENT_GAME_COUNT
         }
       )
-    ).toEqual({ isGameInitiated: true });
+    ).toEqual({ gameCounter: 1 });
   });
 
   it("should set the selected resource", () => {
@@ -38,5 +40,29 @@ describe("Game reducer", () => {
         }
       )
     ).toEqual({ selectedResource: constants.RESOURCE_LIST[0].name });
+  });
+
+  it("should increment the player win count by ID", () => {
+    expect(
+      gameReducer(
+        {
+          players: [
+            { id: 1, winCount: 0 },
+            { id: 2, winCount: 0 }
+          ]
+        },
+        {
+          type: ACTION_TYPES.INCREMENT_WIN_COUNT_BY_PLAYER_ID,
+          payload: {
+            id: 1
+          }
+        }
+      )
+    ).toEqual({
+      players: [
+        { id: 1, winCount: 1 },
+        { id: 2, winCount: 0 }
+      ]
+    });
   });
 });

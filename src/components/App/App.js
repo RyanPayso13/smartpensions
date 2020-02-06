@@ -5,6 +5,7 @@ import { gameReducer, initialState } from "../../state/reducers/gameReducer";
 import Row from "react-bootstrap/Row";
 import ResourceSelect from "../ResourceSelect/ResourceSelect";
 import { Navbar, Col } from "react-bootstrap";
+import Player from "../../containers/Player/Player";
 
 function App() {
   const [state, dispatch] = useReducer(gameReducer, initialState);
@@ -23,6 +24,17 @@ function App() {
           <Col>
             <ResourceSelect />
           </Col>
+        </Row>
+        <Row>
+          {state.players &&
+            state.players.length > 0 &&
+            state.players.map(player => {
+              return (
+                <Col key={player.id}>
+                  <Player id={player.id} />
+                </Col>
+              );
+            })}
         </Row>
       </Container>
     </Context.Provider>
