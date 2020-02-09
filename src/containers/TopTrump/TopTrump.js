@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useContext, useCallback } from "react";
+import Alert from "react-bootstrap/Alert";
+import Spinner from "react-bootstrap/Spinner";
 import * as constants from "../../constants/index";
 import * as utils from "../../libs/utils";
 import * as actions from "../../state/actions/actionCreators";
@@ -8,13 +10,18 @@ import TopTrumpAttributeList from "../../components/TopTrumpAttributeList/TopTru
 const TopTrump = ({ id = null }) => {
   const { state, dispatch } = useContext(Context);
   const [listData, setListData] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
   const fetchData = useCallback(async () => {
-    const result = constants.RESOURCE_LIST.find(
+    const result = [...constants.RESOURCE_LIST].find(
       el => el.name === state.selectedResource
     );
     const randomInt = utils.getRandonIntFromRange(1, result.count);
     const url = `${constants.API_BASE_URL}/${state.selectedResource}/${randomInt}`;
 
+    setListData({});
+    setIsError(false);
+    setIsLoading(true);
     try {
       const result = await fetch(url);
       result.json().then(data => {
@@ -32,40 +39,18 @@ const TopTrump = ({ id = null }) => {
         }
       });
     } catch (error) {
-      // error handling
+      setIsError(true);
     } finally {
-      // loading end
+      setIsLoading(false);
     }
   }, [state.selectedResource, dispatch, id]);
 
-  const handleOnClick = item => {
-    const opponent = [...state.players].find(player => player.id !== id);
-    const opponentAttr = opponent.topTrump[item];
-    const playerAttr = listData[item];
-
-    let winner;
-
-    if (Number.isNaN(playerAttr)) {
-      winner = opponent.id;
-    }
-
-    if (Number.isNaN(opponentAttr)) {
-      winner = id;
-    }
-
-    if (playerAttr > opponentAttr) {
-      winner = id;
-    } else {
-      winner = opponent.id;
-    }
-
-    if (playerAttr === opponentAttr) {
-      // draw
-      return;
-    }
-
-    dispatch(actions.incrementWinCount(winner));
-  };
+  const handleOnClick = item =>
+    dispatch(
+      actions.incrementWinCount(
+        utils.determineGameWinner(state, id, listData, item)
+      )
+    );
 
   useEffect(() => {
     if (state.gameCounter > 0) {
@@ -74,13 +59,16 @@ const TopTrump = ({ id = null }) => {
   }, [state.gameCounter, fetchData]);
 
   return (
-    listData &&
-    Object.keys(listData).length > 0 && (
-      <TopTrumpAttributeList
-        listData={listData}
-        handleOnClick={handleOnClick}
-      />
-    )
+    <React.Fragment>
+      {isLoading && <Spinner animation="border" variant="primary"></Spinner>}
+      {isError && <Alert variant="danger">There has been an error!</Alert>}
+      {listData && Object.keys(listData).length > 0 && (
+        <TopTrumpAttributeList
+          listData={listData}
+          handleOnClick={handleOnClick}
+        />
+      )}
+    </React.Fragment>
   );
 };
 

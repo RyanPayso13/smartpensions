@@ -16,3 +16,25 @@ export const extractListData = (resource = "", data = {}) => {
   [...attr].forEach(el => (result[el] = data[el]));
   return result;
 };
+
+export const determineGameWinner = (state, id, data, item) => {
+  const opponent = [...state.players].find(player => player.id !== id);
+  const opponentAttr = opponent.topTrump[item];
+  const playerAttr = data[item];
+
+  let winner;
+
+  if (Number.isNaN(playerAttr)) {
+    winner = opponent.id;
+  } else if (Number.isNaN(opponentAttr)) {
+    winner = id;
+  } else if (playerAttr > opponentAttr) {
+    winner = id;
+  } else if (playerAttr < opponentAttr) {
+    winner = opponent.id;
+  } else {
+    winner = id;
+  }
+
+  return winner;
+};
