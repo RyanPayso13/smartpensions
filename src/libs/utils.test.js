@@ -58,5 +58,53 @@ describe("Utilities", () => {
     });
   });
 
-  describe("Determine game winner", () => {});
+  describe("Determine game winner", () => {
+    let state = {
+      players: [
+        {
+          id: 1,
+          topTrump: {
+            height: 100
+          }
+        },
+        {
+          id: 2,
+          topTrump: {
+            height: 200
+          }
+        }
+      ]
+    };
+    const height = "height";
+
+    it("should determine player 1 as winner if player 2 value isNaN", () => {
+      const data = { height: "unknown" };
+      const winner = utils.determineGameWinner(state, 2, data, height);
+      expect(winner).toEqual(1);
+    });
+
+    it("should determine player 2 as winner if player 1 value isNaN", () => {
+      const data = { height: "unknown" };
+      const winner = utils.determineGameWinner(state, 1, data, height);
+      expect(winner).toEqual(2);
+    });
+
+    it("should determine player 1 as winner if player 2 value is less than player 1 value", () => {
+      const data = { height: 300 };
+      const winner = utils.determineGameWinner(state, 1, data, height);
+      expect(winner).toEqual(1);
+    });
+
+    it("should determine player 2 as winner if player 1 value is less than player 2 value", () => {
+      const data = { height: 0 };
+      const winner = utils.determineGameWinner(state, 1, data, height);
+      expect(winner).toEqual(2);
+    });
+
+    it("should determine player 1 as winner as default case", () => {
+      const data = { height: 200 };
+      const winner = utils.determineGameWinner(state, 1, data, height);
+      expect(winner).toEqual(1);
+    });
+  });
 });

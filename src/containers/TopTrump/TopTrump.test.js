@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  render,
-  fireEvent,
-  wait,
-  waitForElement
-} from "@testing-library/react";
+import { render, fireEvent, waitForElement } from "@testing-library/react";
 import { FetchMock, fetchMock } from "@react-mock/fetch";
 import TopTrump from "./TopTrump";
 import * as constants from "../../constants/index";
