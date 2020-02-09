@@ -58,6 +58,12 @@ describe("Utilities", () => {
     });
   });
 
+  it("should format the item attribute for display", () => {
+    expect(utils.formatItemForDisplay("cost_in_credits")).toEqual(
+      "cost in credits"
+    );
+  });
+
   describe("Determine game winner", () => {
     let state = {
       players: [

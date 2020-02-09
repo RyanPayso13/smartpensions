@@ -38,3 +38,7 @@ export const determineGameWinner = (state, id, data, item) => {
 
   return winner;
 };
+
+export const formatItemForDisplay = item => {
+  return item.replace(/_/g, " ");
+};

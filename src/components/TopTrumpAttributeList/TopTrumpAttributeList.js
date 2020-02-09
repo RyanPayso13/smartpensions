@@ -1,4 +1,5 @@
 import React from "react";
+import * as utils from "../../libs/utils";
 import ListGroup from "react-bootstrap/ListGroup";
 
 const TopTrumpAttributeList = ({ listData = {}, handleOnClick = null }) => {
@@ -8,7 +9,8 @@ const TopTrumpAttributeList = ({ listData = {}, handleOnClick = null }) => {
         <React.Fragment key={index}>
           {item === "name" ? (
             <ListGroup.Item>
-              {item}: <strong>{listData[item]}</strong>
+              {utils.formatItemForDisplay(item)}:{" "}
+              <strong>{listData[item]}</strong>
             </ListGroup.Item>
           ) : (
             <ListGroup.Item
@@ -17,7 +19,8 @@ const TopTrumpAttributeList = ({ listData = {}, handleOnClick = null }) => {
                 handleOnClick(item);
               }}
             >
-              {item}: <strong>{listData[item]}</strong>
+              {utils.formatItemForDisplay(item)}:{" "}
+              <strong>{listData[item]}</strong>
             </ListGroup.Item>
           )}
         </React.Fragment>
