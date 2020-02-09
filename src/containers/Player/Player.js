@@ -5,10 +5,11 @@ import PlayerCard from "../../components/PlayerCard/PlayerCard";
 const Player = ({ id = null }) => {
   const { state } = useContext(Context);
   const [winCount, setWinCount] = useState(0);
+  const index = [...state.players].findIndex(player => player.id === id);
+  let playerWinCount = state.players[index].winCount;
   useEffect(() => {
-    const player = [...state.players].find(player => player.id === id);
-    setWinCount(player.winCount);
-  }, [id, state.players]);
+    setWinCount(playerWinCount);
+  }, [id, playerWinCount]);
 
   return <PlayerCard id={id} winCount={winCount} />;
 };
