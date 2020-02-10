@@ -24,28 +24,46 @@ function updateItemInArray(array, itemId, updateItemCallback) {
   return updatedItems;
 }
 
-export const gameReducer = (state = initialState, action = "") => {
-  let newPlayers;
+function incrementGameCount(state) {
+  return updateObject(state, { gameCounter: state.gameCounter + 1 });
+}
 
+function setSelectedresource(state, action) {
+  return updateObject(state, { selectedResource: action.payload });
+}
+
+function incrementWinCount(state, action) {
+  const newPlayers = updateItemInArray(
+    state.players,
+    action.payload,
+    player => {
+      return updateObject(player, { winCount: player.winCount + 1 });
+    }
+  );
+  return updateObject(state, { players: newPlayers });
+}
+
+function setTopTrump(state, action) {
+  const newPlayers = updateItemInArray(
+    state.players,
+    action.payload.id,
+    player => {
+      return updateObject(player, { topTrump: action.payload.topTrump });
+    }
+  );
+  return updateObject(state, { players: newPlayers });
+}
+
+export const gameReducer = (state = initialState, action = "") => {
   switch (action.type) {
     case ACTION_TYPES.INCREMENT_GAME_COUNT:
-      return updateObject(state, { gameCounter: state.gameCounter + 1 });
+      return incrementGameCount(state);
     case ACTION_TYPES.SET_SELECTED_RESOURCE:
-      return updateObject(state, { selectedResource: action.payload });
+      return setSelectedresource(state, action);
     case ACTION_TYPES.INCREMENT_WIN_COUNT_BY_PLAYER_ID:
-      newPlayers = updateItemInArray(state.players, action.payload, player => {
-        return updateObject(player, { winCount: player.winCount + 1 });
-      });
-      return updateObject(state, { players: newPlayers });
+      return incrementWinCount(state, action);
     case ACTION_TYPES.SET_TOP_TRUMP_BY_PLAYER_ID:
-      newPlayers = updateItemInArray(
-        state.players,
-        action.payload.id,
-        player => {
-          return updateObject(player, { topTrump: action.payload.topTrump });
-        }
-      );
-      return updateObject(state, { players: newPlayers });
+      return setTopTrump(state, action);
     case ACTION_TYPES.SET_WINNING_ATTRIBUTE_BY_PLAYER_ID:
       return {
         ...state,
