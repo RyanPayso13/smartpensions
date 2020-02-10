@@ -28,7 +28,7 @@ function incrementGameCount(state) {
   return updateObject(state, { gameCounter: state.gameCounter + 1 });
 }
 
-function setSelectedresource(state, action) {
+function setSelectedResource(state, action) {
   return updateObject(state, { selectedResource: action.payload });
 }
 
@@ -54,33 +54,40 @@ function setTopTrump(state, action) {
   return updateObject(state, { players: newPlayers });
 }
 
+function setWinningAttribute(state, action) {
+  const newPlayers = state.players.map(player => {
+    return updateObject(player, {
+      attribute: player.id !== action.payload.id ? "" : action.payload.attribute
+    });
+  });
+
+  return updateObject(state, { players: newPlayers });
+}
+
+function resetAttributes(state, action) {
+  const newPlayers = state.players.map(player => {
+    return updateObject(player, {
+      attribute: ""
+    });
+  });
+
+  return updateObject(state, { players: newPlayers });
+}
+
 export const gameReducer = (state = initialState, action = "") => {
   switch (action.type) {
     case ACTION_TYPES.INCREMENT_GAME_COUNT:
       return incrementGameCount(state);
     case ACTION_TYPES.SET_SELECTED_RESOURCE:
-      return setSelectedresource(state, action);
+      return setSelectedResource(state, action);
     case ACTION_TYPES.INCREMENT_WIN_COUNT_BY_PLAYER_ID:
       return incrementWinCount(state, action);
     case ACTION_TYPES.SET_TOP_TRUMP_BY_PLAYER_ID:
       return setTopTrump(state, action);
     case ACTION_TYPES.SET_WINNING_ATTRIBUTE_BY_PLAYER_ID:
-      return {
-        ...state,
-        players: [...state.players].map(player => {
-          return updateObject(player, {
-            attribute:
-              player.id !== action.payload.id ? "" : action.payload.attribute
-          });
-        })
-      };
+      return setWinningAttribute(state, action);
     case ACTION_TYPES.RESET_WINNING_ATTRIBUTE:
-      return {
-        ...state,
-        players: [...state.players].map(player => {
-          return updateObject(player, { ...action.payload });
-        })
-      };
+      return resetAttributes(state, action);
     default:
       return { ...state };
   }
