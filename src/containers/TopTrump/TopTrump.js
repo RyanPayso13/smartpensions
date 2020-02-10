@@ -16,7 +16,7 @@ const TopTrump = ({ id = null }) => {
     const result = [...constants.RESOURCE_LIST].find(
       el => el.name === state.selectedResource
     );
-    const randomInt = utils.getRandonIntFromRange(1, result.count);
+    const randomInt = utils.getRandomIntFromRange(1, result.count);
     const url = `${constants.API_BASE_URL}/${state.selectedResource}/${randomInt}`;
 
     setListData({});
@@ -45,12 +45,12 @@ const TopTrump = ({ id = null }) => {
     }
   }, [state.selectedResource, dispatch, id]);
 
-  const handleOnClick = item =>
-    dispatch(
-      actions.incrementWinCount(
-        utils.determineGameWinner(state, id, listData, item)
-      )
-    );
+  const handleOnClick = item => {
+    let winner = utils.determineGameWinner(state, id, listData, item);
+
+    dispatch(actions.incrementWinCount(winner));
+    dispatch(actions.setWinningAttribute({ id: winner, attribute: item }));
+  };
 
   useEffect(() => {
     if (state.gameCounter > 0) {

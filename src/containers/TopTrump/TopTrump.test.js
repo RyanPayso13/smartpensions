@@ -33,7 +33,7 @@ describe("<TopTrump />", () => {
   const resp = { name: "C-3PO", height: "167", mass: "75" };
 
   beforeEach(() => {
-    jest.spyOn(utils, "getRandonIntFromRange").mockImplementation(() => {
+    jest.spyOn(utils, "getRandomIntFromRange").mockImplementation(() => {
       return 2;
     });
   });
@@ -153,7 +153,7 @@ describe("<TopTrump />", () => {
       "height"
     );
     expect(dispatch).toHaveBeenCalled();
-    expect(dispatch).toHaveBeenLastCalledWith({
+    expect(dispatch).toHaveBeenNthCalledWith(2, {
       payload: 1,
       type: ACTION_TYPES.INCREMENT_WIN_COUNT_BY_PLAYER_ID
     });

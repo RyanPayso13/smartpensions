@@ -27,3 +27,15 @@ export function setTopTrump(data = null) {
     payload: data
   };
 }
+
+export function setWinningAttribute(
+  data = {
+    id: null,
+    attribute: ""
+  }
+) {
+  return {
+    type: ACTION_TYPES.SET_WINNING_ATTRIBUTE_BY_PLAYER_ID,
+    payload: data
+  };
+}

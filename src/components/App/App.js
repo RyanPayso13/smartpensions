@@ -3,9 +3,10 @@ import Context from "../../state/context";
 import Container from "react-bootstrap/Container";
 import { gameReducer, initialState } from "../../state/reducers/gameReducer";
 import Row from "react-bootstrap/Row";
+import Navbar from "react-bootstrap/Navbar";
+import Col from "react-bootstrap/Col";
 import ResourceSelect from "../ResourceSelect/ResourceSelect";
-import { Navbar, Col } from "react-bootstrap";
-import Player from "../../containers/Player/Player";
+import PlayerCard from "../../containers/PlayerCard/PlayerCard";
 
 function App() {
   const [state, dispatch] = useReducer(gameReducer, initialState);
@@ -31,7 +32,7 @@ function App() {
             state.players.map(player => {
               return (
                 <Col key={player.id}>
-                  <Player id={player.id} />
+                  <PlayerCard id={player.id} />
                 </Col>
               );
             })}

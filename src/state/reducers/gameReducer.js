@@ -4,8 +4,8 @@ export const initialState = {
   gameCounter: 0,
   selectedResource: null,
   players: [
-    { id: 1, winCount: 0, topTrump: null },
-    { id: 2, winCount: 0, topTrump: null }
+    { id: 1, winCount: 0, topTrump: null, attribute: "" },
+    { id: 2, winCount: 0, topTrump: null, attribute: "" }
   ]
 };
 
@@ -22,32 +22,43 @@ export const gameReducer = (state = initialState, action = "") => {
         selectedResource: action.payload
       };
     case ACTION_TYPES.INCREMENT_WIN_COUNT_BY_PLAYER_ID:
-      let result = [...state.players].map(player => {
-        if (player.id === action.payload) {
-          return {
-            ...player,
-            winCount: player.winCount + 1
-          };
-        }
-        return player;
-      });
       return {
         ...state,
-        players: result
+        players: [...state.players].map(player => {
+          return player.id !== action.payload
+            ? player
+            : {
+                ...player,
+                winCount: player.winCount + 1
+              };
+        })
       };
     case ACTION_TYPES.SET_TOP_TRUMP_BY_PLAYER_ID:
-      let updated = [...state.players].map(player => {
-        if (player.id === action.payload.id) {
-          return {
-            ...player,
-            topTrump: action.payload.topTrump
-          };
-        }
-        return player;
-      });
       return {
         ...state,
-        players: updated
+        players: [...state.players].map(player => {
+          return player.id !== action.payload.id
+            ? player
+            : {
+                ...player,
+                ...action.payload
+              };
+        })
+      };
+    case ACTION_TYPES.SET_WINNING_ATTRIBUTE_BY_PLAYER_ID:
+      return {
+        ...state,
+        players: [...state.players].map(player => {
+          return player.id !== action.payload.id
+            ? {
+                ...player,
+                attribute: ""
+              }
+            : {
+                ...player,
+                attribute: action.payload.attribute
+              };
+        })
       };
     default:
       return { ...state };

@@ -8,8 +8,8 @@ describe("Game reducer", () => {
       gameCounter: 0,
       selectedResource: null,
       players: [
-        { id: 1, winCount: 0, topTrump: null },
-        { id: 2, winCount: 0, topTrump: null }
+        { id: 1, winCount: 0, topTrump: null, attribute: "" },
+        { id: 2, winCount: 0, topTrump: null, attribute: "" }
       ]
     });
   });
@@ -85,6 +85,31 @@ describe("Game reducer", () => {
       players: [
         { id: 1, winCount: 0, topTrump: { name: "Yoda", height: 90 } },
         { id: 2, winCount: 0, topTrump: null }
+      ]
+    });
+  });
+
+  it("should set the winning attribute", () => {
+    expect(
+      gameReducer(
+        {
+          players: [
+            { id: 1, attribute: "" },
+            { id: 2, attribute: "" }
+          ]
+        },
+        {
+          type: ACTION_TYPES.SET_WINNING_ATTRIBUTE_BY_PLAYER_ID,
+          payload: {
+            id: 1,
+            attribute: "mass"
+          }
+        }
+      )
+    ).toEqual({
+      players: [
+        { id: 1, attribute: "mass" },
+        { id: 2, attribute: "" }
       ]
     });
   });

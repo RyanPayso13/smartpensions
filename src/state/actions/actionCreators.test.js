@@ -47,4 +47,16 @@ describe("Action Creators", () => {
     };
     expect(actions.setTopTrump(payload)).toEqual(expectedAction);
   });
+
+  it("should set the winning attribute", () => {
+    const payload = {
+      id: 1,
+      attribute: "mass"
+    };
+    const expectedAction = {
+      type: ACTION_TYPES.SET_WINNING_ATTRIBUTE_BY_PLAYER_ID,
+      payload
+    };
+    expect(actions.setWinningAttribute(payload)).toEqual(expectedAction);
+  });
 });
