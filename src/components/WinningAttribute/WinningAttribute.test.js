@@ -10,7 +10,7 @@ function generateComponent(attribute = "") {
 describe("<WinningAttribute />", () => {
   it("should exist", () => {
     const { getByText } = render(generateComponent());
-    expect(getByText(/Wining attribute:/)).toBeInTheDocument();
+    expect(getByText(/Winning attribute:/)).toBeInTheDocument();
   });
 
   it("should render the attribute as a <Badge />", () => {

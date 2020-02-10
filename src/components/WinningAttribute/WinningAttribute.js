@@ -5,7 +5,7 @@ import * as utils from "../../libs/utils";
 const WinningAttribute = ({ attribute = "" }) => {
   return (
     <React.Fragment>
-      Wining attribute:{" "}
+      Winning attribute:{" "}
       {attribute !== "" && (
         <Badge variant="info">{utils.formatItemForDisplay(attribute)}</Badge>
       )}
