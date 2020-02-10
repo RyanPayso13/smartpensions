@@ -113,4 +113,28 @@ describe("Game reducer", () => {
       ]
     });
   });
+
+  it("should reset the winning attribute", () => {
+    expect(
+      gameReducer(
+        {
+          players: [
+            { id: 1, attribute: "mass" },
+            { id: 2, attribute: "" }
+          ]
+        },
+        {
+          type: ACTION_TYPES.RESET_WINNING_ATTRIBUTE,
+          payload: {
+            attribute: ""
+          }
+        }
+      )
+    ).toEqual({
+      players: [
+        { id: 1, attribute: "" },
+        { id: 2, attribute: "" }
+      ]
+    });
+  });
 });

@@ -77,14 +77,20 @@ describe("<ResourceSelect />", () => {
       });
       fireEvent.click(submit);
       expect(dispatch).toHaveBeenCalled();
-      expect(dispatch).toHaveBeenCalledTimes(2);
+      expect(dispatch).toHaveBeenCalledTimes(3);
       expect(dispatch).toHaveBeenNthCalledWith(1, {
         payload: 0,
         type: ACTION_TYPES.INCREMENT_GAME_COUNT
       });
-      expect(dispatch).toHaveBeenLastCalledWith({
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
         payload: constants.RESOURCE_LIST[0].name,
         type: ACTION_TYPES.SET_SELECTED_RESOURCE
+      });
+      expect(dispatch).toHaveBeenNthCalledWith(3, {
+        payload: {
+          attribute: ""
+        },
+        type: ACTION_TYPES.RESET_WINNING_ATTRIBUTE
       });
     });
   });

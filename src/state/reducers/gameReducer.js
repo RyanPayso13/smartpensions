@@ -60,6 +60,13 @@ export const gameReducer = (state = initialState, action = "") => {
               };
         })
       };
+    case ACTION_TYPES.RESET_WINNING_ATTRIBUTE:
+      return {
+        ...state,
+        players: [...state.players].map(player => {
+          return { ...player, ...action.payload };
+        })
+      };
     default:
       return { ...state };
   }

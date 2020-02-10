@@ -59,4 +59,15 @@ describe("Action Creators", () => {
     };
     expect(actions.setWinningAttribute(payload)).toEqual(expectedAction);
   });
+
+  it("should reset the winning attribute", () => {
+    const payload = {
+      attribute: ""
+    };
+    const expectedAction = {
+      type: ACTION_TYPES.RESET_WINNING_ATTRIBUTE,
+      payload
+    };
+    expect(actions.resetWinningAttribute(payload)).toEqual(expectedAction);
+  });
 });

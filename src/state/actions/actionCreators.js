@@ -39,3 +39,14 @@ export function setWinningAttribute(
     payload: data
   };
 }
+
+export function resetWinningAttribute(
+  data = {
+    attribute: ""
+  }
+) {
+  return {
+    type: ACTION_TYPES.RESET_WINNING_ATTRIBUTE,
+    payload: data
+  };
+}

@@ -19,6 +19,7 @@ const ResourceSelect = () => {
     event.stopPropagation();
     dispatch(actions.incrementGameCount());
     dispatch(actions.setSelectedResource(selectEl.current.value));
+    dispatch(actions.resetWinningAttribute());
   };
 
   return (
