@@ -14,8 +14,7 @@ function generateComponent(id = null, state = initialState) {
 
 describe("<PlayerCard />", () => {
   it("should exist", () => {
-    const { container, debug } = render(generateComponent(1));
-    debug();
+    const { container } = render(generateComponent(1));
     expect(container.querySelector(".card")).toBeInTheDocument();
   });
 
