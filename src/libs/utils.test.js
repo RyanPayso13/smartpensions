@@ -113,4 +113,33 @@ describe("Utilities", () => {
       expect(winner).toEqual(1);
     });
   });
+
+  it("should update an object with new values", () => {
+    expect(utils.updateObject({ count: 0 }, { count: 99 })).toEqual({
+      count: 99
+    });
+  });
+
+  it("should update an item in array", () => {
+    const result = utils.updateItemInArray(
+      [
+        {
+          id: 1,
+          count: 1
+        },
+        {
+          id: 2,
+          count: 2
+        }
+      ],
+      2,
+      item => {
+        return utils.updateObject(item, { count: 99 });
+      }
+    );
+
+    expect(result.length).toEqual(2);
+    expect(result[0]).toEqual({ id: 1, count: 1 });
+    expect(result[1]).toEqual({ id: 2, count: 99 });
+  });
 });

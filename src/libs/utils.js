@@ -42,3 +42,17 @@ export const determineGameWinner = (state, id, data, item) => {
 export const formatItemForDisplay = item => {
   return item.replace(/_/g, " ");
 };
+
+export const updateObject = (oldObject, newValues) => {
+  return Object.assign({}, oldObject, newValues);
+};
+
+export const updateItemInArray = (array, itemId, updateItemCallback) => {
+  return array.map(item => {
+    if (item.id !== itemId) {
+      return item;
+    }
+    const updatedItem = updateItemCallback(item);
+    return updatedItem;
+  });
+};

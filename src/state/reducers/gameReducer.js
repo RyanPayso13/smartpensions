@@ -1,4 +1,5 @@
 import * as ACTION_TYPES from "../actions/actionTypes";
+import * as utils from "../../libs/utils";
 
 export const initialState = {
   gameCounter: 0,
@@ -9,69 +10,54 @@ export const initialState = {
   ]
 };
 
-function updateObject(oldObject, newValues) {
-  return Object.assign({}, oldObject, newValues);
-}
-
-function updateItemInArray(array, itemId, updateItemCallback) {
-  const updatedItems = array.map(item => {
-    if (item.id !== itemId) {
-      return item;
-    }
-    const updatedItem = updateItemCallback(item);
-    return updatedItem;
-  });
-  return updatedItems;
-}
-
 function incrementGameCount(state) {
-  return updateObject(state, { gameCounter: state.gameCounter + 1 });
+  return utils.updateObject(state, { gameCounter: state.gameCounter + 1 });
 }
 
 function setSelectedResource(state, action) {
-  return updateObject(state, { selectedResource: action.payload });
+  return utils.updateObject(state, { selectedResource: action.payload });
 }
 
 function incrementWinCount(state, action) {
-  const newPlayers = updateItemInArray(
+  const newPlayers = utils.updateItemInArray(
     state.players,
     action.payload,
     player => {
-      return updateObject(player, { winCount: player.winCount + 1 });
+      return utils.updateObject(player, { winCount: player.winCount + 1 });
     }
   );
-  return updateObject(state, { players: newPlayers });
+  return utils.updateObject(state, { players: newPlayers });
 }
 
 function setTopTrump(state, action) {
-  const newPlayers = updateItemInArray(
+  const newPlayers = utils.updateItemInArray(
     state.players,
     action.payload.id,
     player => {
-      return updateObject(player, { topTrump: action.payload.topTrump });
+      return utils.updateObject(player, { topTrump: action.payload.topTrump });
     }
   );
-  return updateObject(state, { players: newPlayers });
+  return utils.updateObject(state, { players: newPlayers });
 }
 
 function setWinningAttribute(state, action) {
   const newPlayers = state.players.map(player => {
-    return updateObject(player, {
+    return utils.updateObject(player, {
       attribute: player.id !== action.payload.id ? "" : action.payload.attribute
     });
   });
 
-  return updateObject(state, { players: newPlayers });
+  return utils.updateObject(state, { players: newPlayers });
 }
 
-function resetAttributes(state, action) {
+function resetAttributes(state) {
   const newPlayers = state.players.map(player => {
-    return updateObject(player, {
+    return utils.updateObject(player, {
       attribute: ""
     });
   });
 
-  return updateObject(state, { players: newPlayers });
+  return utils.updateObject(state, { players: newPlayers });
 }
 
 export const gameReducer = (state = initialState, action = "") => {
