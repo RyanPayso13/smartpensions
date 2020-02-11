@@ -15,10 +15,10 @@ describe("Action Creators", () => {
   it("should set the selected resource", () => {
     const payload = constants.RESOURCE_LIST[0].name;
     const expectedAction = {
-      type: ACTION_TYPES.SET_SELECTED_RESOURCE,
+      type: ACTION_TYPES.SET_RESOURCE,
       payload
     };
-    expect(actions.setSelectedResource(payload)).toEqual(expectedAction);
+    expect(actions.setResource(payload)).toEqual(expectedAction);
   });
 
   it("should increment the win count", () => {

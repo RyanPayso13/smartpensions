@@ -84,7 +84,7 @@ describe("<ResourceSelect />", () => {
       });
       expect(dispatch).toHaveBeenNthCalledWith(2, {
         payload: constants.RESOURCE_LIST[0].name,
-        type: ACTION_TYPES.SET_SELECTED_RESOURCE
+        type: ACTION_TYPES.SET_RESOURCE
       });
       expect(dispatch).toHaveBeenNthCalledWith(3, {
         payload: {

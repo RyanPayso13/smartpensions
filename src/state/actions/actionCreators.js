@@ -7,9 +7,9 @@ export function setGameCount(data = 0) {
   };
 }
 
-export function setSelectedResource(data = null) {
+export function setResource(data = "") {
   return {
-    type: ACTION_TYPES.SET_SELECTED_RESOURCE,
+    type: ACTION_TYPES.SET_RESOURCE,
     payload: data
   };
 }

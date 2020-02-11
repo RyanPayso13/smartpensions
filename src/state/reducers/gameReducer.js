@@ -20,7 +20,7 @@ function setGameCount(state) {
   });
 }
 
-function setSelectedResource(state, action) {
+function setResource(state, action) {
   return utils.updateObject(state, { selectedResource: action.payload });
 }
 
@@ -70,8 +70,8 @@ export const gameReducer = (state = initialState, action = "") => {
   switch (action.type) {
     case ACTION_TYPES.SET_GAME_COUNT:
       return setGameCount(state);
-    case ACTION_TYPES.SET_SELECTED_RESOURCE:
-      return setSelectedResource(state, action);
+    case ACTION_TYPES.SET_RESOURCE:
+      return setResource(state, action);
     case ACTION_TYPES.INCREMENT_WIN_COUNT_BY_PLAYER_ID:
       return incrementWinCount(state, action);
     case ACTION_TYPES.SET_TOP_TRUMP_BY_PLAYER_ID:

@@ -39,7 +39,7 @@ describe("Game reducer", () => {
           selectedResource: null
         },
         {
-          type: ACTION_TYPES.SET_SELECTED_RESOURCE,
+          type: ACTION_TYPES.SET_RESOURCE,
           payload: payload
         }
       )
