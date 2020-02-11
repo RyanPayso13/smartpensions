@@ -3,13 +3,13 @@ import * as actions from "./actionCreators";
 import * as constants from "../../constants/index";
 
 describe("Action Creators", () => {
-  it("should increment the game count", () => {
+  it("should set the game count", () => {
     const payload = 0;
     const expectedAction = {
-      type: ACTION_TYPES.INCREMENT_GAME_COUNT,
+      type: ACTION_TYPES.SET_GAME_COUNT,
       payload
     };
-    expect(actions.incrementGameCount(payload)).toEqual(expectedAction);
+    expect(actions.setGameCount(payload)).toEqual(expectedAction);
   });
 
   it("should set the selected resource", () => {

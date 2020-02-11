@@ -57,7 +57,9 @@ describe("<TopTrump />", () => {
     const { container } = render(
       generateContextualComponent(
         {
-          gameCounter: 1,
+          game: {
+            count: 1
+          },
           selectedResource: constants.RESOURCE_LIST[1].name
         },
         jest.fn(),
@@ -71,7 +73,9 @@ describe("<TopTrump />", () => {
   it("should render an error message", async () => {
     const { getByText } = render(
       generateContextualComponent({
-        gameCounter: 1,
+        game: {
+          count: 1
+        },
         selectedResource: constants.RESOURCE_LIST[0].name,
         throws: new Error("Some No Good Error")
       })
@@ -86,7 +90,9 @@ describe("<TopTrump />", () => {
     const { container } = render(
       generateContextualComponent(
         {
-          gameCounter: 1,
+          game: {
+            count: 1
+          },
           selectedResource: constants.RESOURCE_LIST[1].name
         },
         jest.fn(),
@@ -104,7 +110,9 @@ describe("<TopTrump />", () => {
     const { container } = render(
       generateContextualComponent(
         {
-          gameCounter: 1,
+          game: {
+            count: 1
+          },
           selectedResource: constants.RESOURCE_LIST[1].name
         },
         dispatch,
@@ -133,7 +141,9 @@ describe("<TopTrump />", () => {
     const { getByText } = render(
       generateContextualComponent(
         {
-          gameCounter: 1,
+          game: {
+            count: 1
+          },
           selectedResource: constants.RESOURCE_LIST[1].name
         },
         dispatch,
@@ -147,7 +157,12 @@ describe("<TopTrump />", () => {
     fireEvent.click(heightAttr);
     expect(spy).toHaveBeenCalled();
     expect(spy).toHaveBeenCalledWith(
-      { gameCounter: 1, selectedResource: "people" },
+      {
+        game: {
+          count: 1
+        },
+        selectedResource: "people"
+      },
       "1",
       { height: "167", mass: "75", name: "C-3PO" },
       "height"

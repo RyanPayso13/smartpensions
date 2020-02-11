@@ -1,8 +1,8 @@
 import * as ACTION_TYPES from "./actionTypes";
 
-export function incrementGameCount(data = 0) {
+export function setGameCount(data = 0) {
   return {
-    type: ACTION_TYPES.INCREMENT_GAME_COUNT,
+    type: ACTION_TYPES.SET_GAME_COUNT,
     payload: data
   };
 }

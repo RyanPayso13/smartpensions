@@ -80,7 +80,7 @@ describe("<ResourceSelect />", () => {
       expect(dispatch).toHaveBeenCalledTimes(3);
       expect(dispatch).toHaveBeenNthCalledWith(1, {
         payload: 0,
-        type: ACTION_TYPES.INCREMENT_GAME_COUNT
+        type: ACTION_TYPES.SET_GAME_COUNT
       });
       expect(dispatch).toHaveBeenNthCalledWith(2, {
         payload: constants.RESOURCE_LIST[0].name,

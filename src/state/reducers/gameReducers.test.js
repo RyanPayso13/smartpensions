@@ -5,7 +5,9 @@ import * as constants from "../../constants/index";
 describe("Game reducer", () => {
   it("should return the initial state", () => {
     expect(gameReducer()).toEqual({
-      gameCounter: 0,
+      game: {
+        count: 0
+      },
       selectedResource: null,
       players: [
         { id: 1, winCount: 0, topTrump: null, attribute: "" },
@@ -14,17 +16,19 @@ describe("Game reducer", () => {
     });
   });
 
-  it("should increment the game counter", () => {
+  it("should set the game counter", () => {
     expect(
       gameReducer(
         {
-          gameCounter: 0
+          game: {
+            count: 0
+          }
         },
         {
-          type: ACTION_TYPES.INCREMENT_GAME_COUNT
+          type: ACTION_TYPES.SET_GAME_COUNT
         }
       )
-    ).toEqual({ gameCounter: 1 });
+    ).toEqual({ game: { count: 1 } });
   });
 
   it("should set the selected resource", () => {

@@ -53,10 +53,10 @@ const TopTrump = ({ id = null }) => {
   };
 
   useEffect(() => {
-    if (state.gameCounter > 0) {
+    if (state.game.count > 0) {
       fetchData();
     }
-  }, [state.gameCounter, fetchData]);
+  }, [state.game.count, fetchData]);
 
   return (
     <React.Fragment>

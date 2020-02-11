@@ -2,7 +2,9 @@ import * as ACTION_TYPES from "../actions/actionTypes";
 import * as utils from "../../libs/utils";
 
 export const initialState = {
-  gameCounter: 0,
+  game: {
+    count: 0
+  },
   selectedResource: null,
   players: [
     { id: 1, winCount: 0, topTrump: null, attribute: "" },
@@ -10,8 +12,12 @@ export const initialState = {
   ]
 };
 
-function incrementGameCount(state) {
-  return utils.updateObject(state, { gameCounter: state.gameCounter + 1 });
+function setGameCount(state) {
+  return utils.updateObject(state, {
+    game: {
+      count: state.game.count + 1
+    }
+  });
 }
 
 function setSelectedResource(state, action) {
@@ -62,8 +68,8 @@ function resetAttributes(state) {
 
 export const gameReducer = (state = initialState, action = "") => {
   switch (action.type) {
-    case ACTION_TYPES.INCREMENT_GAME_COUNT:
-      return incrementGameCount(state);
+    case ACTION_TYPES.SET_GAME_COUNT:
+      return setGameCount(state);
     case ACTION_TYPES.SET_SELECTED_RESOURCE:
       return setSelectedResource(state, action);
     case ACTION_TYPES.INCREMENT_WIN_COUNT_BY_PLAYER_ID:
