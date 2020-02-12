@@ -58,7 +58,7 @@ describe("Game reducer", () => {
           ]
         },
         {
-          type: ACTION_TYPES.INCREMENT_WIN_COUNT_BY_PLAYER_ID,
+          type: ACTION_TYPES.SET_WIN_COUNT,
           payload: 1
         }
       )
@@ -80,7 +80,7 @@ describe("Game reducer", () => {
           ]
         },
         {
-          type: ACTION_TYPES.SET_TOP_TRUMP_BY_PLAYER_ID,
+          type: ACTION_TYPES.SET_TOP_TRUMP,
           payload: {
             id: 1,
             topTrump: { name: "Yoda", height: 90 }

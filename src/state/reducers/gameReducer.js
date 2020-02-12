@@ -32,7 +32,7 @@ function setResource(state, action) {
   });
 }
 
-function incrementWinCount(state, action) {
+function setWinCount(state, action) {
   const newPlayers = utils.updateItemInArray(
     state.players,
     action.payload,
@@ -70,9 +70,9 @@ export const gameReducer = (state = initialState, action = "") => {
       return setGameCount(state);
     case ACTION_TYPES.SET_RESOURCE:
       return setResource(state, action);
-    case ACTION_TYPES.INCREMENT_WIN_COUNT_BY_PLAYER_ID:
-      return incrementWinCount(state, action);
-    case ACTION_TYPES.SET_TOP_TRUMP_BY_PLAYER_ID:
+    case ACTION_TYPES.SET_WIN_COUNT:
+      return setWinCount(state, action);
+    case ACTION_TYPES.SET_TOP_TRUMP:
       return setTopTrump(state, action);
     case ACTION_TYPES.SET_ATTRIBUTE:
       return setAttribute(state, action);

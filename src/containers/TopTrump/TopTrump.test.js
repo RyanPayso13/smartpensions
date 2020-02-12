@@ -127,7 +127,7 @@ describe("<TopTrump />", () => {
         id: "1",
         topTrump: resp
       },
-      type: ACTION_TYPES.SET_TOP_TRUMP_BY_PLAYER_ID
+      type: ACTION_TYPES.SET_TOP_TRUMP
     });
   });
 
@@ -160,7 +160,7 @@ describe("<TopTrump />", () => {
       {
         game: {
           count: 1,
-          resource: "people"
+          resource: constants.RESOURCE_LIST[1].name
         }
       },
       "1",
@@ -170,7 +170,7 @@ describe("<TopTrump />", () => {
     expect(dispatch).toHaveBeenCalled();
     expect(dispatch).toHaveBeenNthCalledWith(2, {
       payload: 1,
-      type: ACTION_TYPES.INCREMENT_WIN_COUNT_BY_PLAYER_ID
+      type: ACTION_TYPES.SET_WIN_COUNT
     });
   });
 });

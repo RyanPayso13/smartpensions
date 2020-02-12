@@ -26,10 +26,10 @@ describe("Action Creators", () => {
       id: 1
     };
     const expectedAction = {
-      type: ACTION_TYPES.INCREMENT_WIN_COUNT_BY_PLAYER_ID,
+      type: ACTION_TYPES.SET_WIN_COUNT,
       payload
     };
-    expect(actions.incrementWinCount(payload)).toEqual(expectedAction);
+    expect(actions.setWinCount(payload)).toEqual(expectedAction);
   });
 
   it("should set the current top trump for the player", () => {
@@ -42,7 +42,7 @@ describe("Action Creators", () => {
       }
     };
     const expectedAction = {
-      type: ACTION_TYPES.SET_TOP_TRUMP_BY_PLAYER_ID,
+      type: ACTION_TYPES.SET_TOP_TRUMP,
       payload
     };
     expect(actions.setTopTrump(payload)).toEqual(expectedAction);

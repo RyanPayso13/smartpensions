@@ -48,7 +48,7 @@ const TopTrump = ({ id = null }) => {
   const handleOnClick = item => {
     let winner = utils.determineGameWinner(state, id, listData, item);
 
-    dispatch(actions.incrementWinCount(winner));
+    dispatch(actions.setWinCount(winner));
     dispatch(actions.setAttribute({ id: winner, attribute: item }));
   };
 
