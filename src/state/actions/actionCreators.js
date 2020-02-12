@@ -28,25 +28,14 @@ export function setTopTrump(data = null) {
   };
 }
 
-export function setWinningAttribute(
+export function setAttribute(
   data = {
     id: null,
     attribute: ""
   }
 ) {
   return {
-    type: ACTION_TYPES.SET_WINNING_ATTRIBUTE_BY_PLAYER_ID,
-    payload: data
-  };
-}
-
-export function resetWinningAttribute(
-  data = {
-    attribute: ""
-  }
-) {
-  return {
-    type: ACTION_TYPES.RESET_WINNING_ATTRIBUTE,
+    type: ACTION_TYPES.SET_ATTRIBUTE,
     payload: data
   };
 }

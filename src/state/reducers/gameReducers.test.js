@@ -6,9 +6,9 @@ describe("Game reducer", () => {
   it("should return the initial state", () => {
     expect(gameReducer()).toEqual({
       game: {
-        count: 0
+        count: 0,
+        resource: null
       },
-      selectedResource: null,
       players: [
         { id: 1, winCount: 0, topTrump: null, attribute: "" },
         { id: 2, winCount: 0, topTrump: null, attribute: "" }
@@ -36,14 +36,16 @@ describe("Game reducer", () => {
     expect(
       gameReducer(
         {
-          selectedResource: null
+          game: {
+            resource: null
+          }
         },
         {
           type: ACTION_TYPES.SET_RESOURCE,
           payload: payload
         }
       )
-    ).toEqual({ selectedResource: constants.RESOURCE_LIST[0].name });
+    ).toEqual({ game: { resource: constants.RESOURCE_LIST[0].name } });
   });
 
   it("should increment the player win count by ID", () => {
@@ -103,7 +105,7 @@ describe("Game reducer", () => {
           ]
         },
         {
-          type: ACTION_TYPES.SET_WINNING_ATTRIBUTE_BY_PLAYER_ID,
+          type: ACTION_TYPES.SET_ATTRIBUTE,
           payload: {
             id: 1,
             attribute: "mass"
@@ -118,7 +120,7 @@ describe("Game reducer", () => {
     });
   });
 
-  it("should reset the winning attribute", () => {
+  it("should reset the attributes", () => {
     expect(
       gameReducer(
         {
@@ -128,8 +130,9 @@ describe("Game reducer", () => {
           ]
         },
         {
-          type: ACTION_TYPES.RESET_WINNING_ATTRIBUTE,
+          type: ACTION_TYPES.SET_ATTRIBUTE,
           payload: {
+            id: null,
             attribute: ""
           }
         }

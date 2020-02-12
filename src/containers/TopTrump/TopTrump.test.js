@@ -17,7 +17,7 @@ function generateContextualComponent(
     <FetchMock
       mocks={[
         {
-          matcher: `${constants.API_BASE_URL}/${state.selectedResource}/2`,
+          matcher: `${constants.API_BASE_URL}/${state.game.resource}/2`,
           response: resp
         }
       ]}
@@ -58,9 +58,9 @@ describe("<TopTrump />", () => {
       generateContextualComponent(
         {
           game: {
-            count: 1
-          },
-          selectedResource: constants.RESOURCE_LIST[1].name
+            count: 1,
+            resource: constants.RESOURCE_LIST[1].name
+          }
         },
         jest.fn(),
         resp
@@ -74,9 +74,9 @@ describe("<TopTrump />", () => {
     const { getByText } = render(
       generateContextualComponent({
         game: {
-          count: 1
+          count: 1,
+          resource: constants.RESOURCE_LIST[1].name
         },
-        selectedResource: constants.RESOURCE_LIST[0].name,
         throws: new Error("Some No Good Error")
       })
     );
@@ -91,9 +91,9 @@ describe("<TopTrump />", () => {
       generateContextualComponent(
         {
           game: {
-            count: 1
-          },
-          selectedResource: constants.RESOURCE_LIST[1].name
+            count: 1,
+            resource: constants.RESOURCE_LIST[1].name
+          }
         },
         jest.fn(),
         resp
@@ -111,9 +111,9 @@ describe("<TopTrump />", () => {
       generateContextualComponent(
         {
           game: {
-            count: 1
-          },
-          selectedResource: constants.RESOURCE_LIST[1].name
+            count: 1,
+            resource: constants.RESOURCE_LIST[1].name
+          }
         },
         dispatch,
         resp
@@ -142,9 +142,9 @@ describe("<TopTrump />", () => {
       generateContextualComponent(
         {
           game: {
-            count: 1
-          },
-          selectedResource: constants.RESOURCE_LIST[1].name
+            count: 1,
+            resource: constants.RESOURCE_LIST[1].name
+          }
         },
         dispatch,
         resp
@@ -159,9 +159,9 @@ describe("<TopTrump />", () => {
     expect(spy).toHaveBeenCalledWith(
       {
         game: {
-          count: 1
-        },
-        selectedResource: "people"
+          count: 1,
+          resource: "people"
+        }
       },
       "1",
       { height: "167", mass: "75", name: "C-3PO" },

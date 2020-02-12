@@ -54,20 +54,21 @@ describe("Action Creators", () => {
       attribute: "mass"
     };
     const expectedAction = {
-      type: ACTION_TYPES.SET_WINNING_ATTRIBUTE_BY_PLAYER_ID,
+      type: ACTION_TYPES.SET_ATTRIBUTE,
       payload
     };
-    expect(actions.setWinningAttribute(payload)).toEqual(expectedAction);
+    expect(actions.setAttribute(payload)).toEqual(expectedAction);
   });
 
-  it("should reset the winning attribute", () => {
+  it("should reset the attributes", () => {
     const payload = {
+      id: null,
       attribute: ""
     };
     const expectedAction = {
-      type: ACTION_TYPES.RESET_WINNING_ATTRIBUTE,
+      type: ACTION_TYPES.SET_ATTRIBUTE,
       payload
     };
-    expect(actions.resetWinningAttribute(payload)).toEqual(expectedAction);
+    expect(actions.setAttribute()).toEqual(expectedAction);
   });
 });

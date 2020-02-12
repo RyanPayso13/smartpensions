@@ -3,9 +3,9 @@ import * as utils from "../../libs/utils";
 
 export const initialState = {
   game: {
-    count: 0
+    count: 0,
+    resource: null
   },
-  selectedResource: null,
   players: [
     { id: 1, winCount: 0, topTrump: null, attribute: "" },
     { id: 2, winCount: 0, topTrump: null, attribute: "" }
@@ -14,14 +14,22 @@ export const initialState = {
 
 function setGameCount(state) {
   return utils.updateObject(state, {
+    ...state,
     game: {
+      ...state.game,
       count: state.game.count + 1
     }
   });
 }
 
 function setResource(state, action) {
-  return utils.updateObject(state, { selectedResource: action.payload });
+  return utils.updateObject(state, {
+    ...state,
+    game: {
+      ...state.game,
+      resource: action.payload
+    }
+  });
 }
 
 function incrementWinCount(state, action) {
@@ -46,20 +54,10 @@ function setTopTrump(state, action) {
   return utils.updateObject(state, { players: newPlayers });
 }
 
-function setWinningAttribute(state, action) {
+function setAttribute(state, action) {
   const newPlayers = state.players.map(player => {
     return utils.updateObject(player, {
       attribute: player.id !== action.payload.id ? "" : action.payload.attribute
-    });
-  });
-
-  return utils.updateObject(state, { players: newPlayers });
-}
-
-function resetAttributes(state) {
-  const newPlayers = state.players.map(player => {
-    return utils.updateObject(player, {
-      attribute: ""
     });
   });
 
@@ -76,10 +74,8 @@ export const gameReducer = (state = initialState, action = "") => {
       return incrementWinCount(state, action);
     case ACTION_TYPES.SET_TOP_TRUMP_BY_PLAYER_ID:
       return setTopTrump(state, action);
-    case ACTION_TYPES.SET_WINNING_ATTRIBUTE_BY_PLAYER_ID:
-      return setWinningAttribute(state, action);
-    case ACTION_TYPES.RESET_WINNING_ATTRIBUTE:
-      return resetAttributes(state, action);
+    case ACTION_TYPES.SET_ATTRIBUTE:
+      return setAttribute(state, action);
     default:
       return { ...state };
   }

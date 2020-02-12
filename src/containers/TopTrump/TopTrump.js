@@ -14,10 +14,10 @@ const TopTrump = ({ id = null }) => {
   const [isError, setIsError] = useState(false);
   const fetchData = useCallback(async () => {
     const result = [...constants.RESOURCE_LIST].find(
-      el => el.name === state.selectedResource
+      el => el.name === state.game.resource
     );
     const randomInt = utils.getRandomIntFromRange(1, result.count);
-    const url = `${constants.API_BASE_URL}/${state.selectedResource}/${randomInt}`;
+    const url = `${constants.API_BASE_URL}/${state.game.resource}/${randomInt}`;
 
     setListData({});
     setIsError(false);
@@ -28,7 +28,7 @@ const TopTrump = ({ id = null }) => {
         if (data && data.detail === "Not found") {
           fetchData();
         } else {
-          const result = utils.extractListData(state.selectedResource, data);
+          const result = utils.extractListData(state.game.resource, data);
           setListData(result);
           dispatch(
             actions.setTopTrump({
@@ -43,13 +43,13 @@ const TopTrump = ({ id = null }) => {
     } finally {
       setIsLoading(false);
     }
-  }, [state.selectedResource, dispatch, id]);
+  }, [state.game.resource, dispatch, id]);
 
   const handleOnClick = item => {
     let winner = utils.determineGameWinner(state, id, listData, item);
 
     dispatch(actions.incrementWinCount(winner));
-    dispatch(actions.setWinningAttribute({ id: winner, attribute: item }));
+    dispatch(actions.setAttribute({ id: winner, attribute: item }));
   };
 
   useEffect(() => {

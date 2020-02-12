@@ -88,9 +88,10 @@ describe("<ResourceSelect />", () => {
       });
       expect(dispatch).toHaveBeenNthCalledWith(3, {
         payload: {
+          id: null,
           attribute: ""
         },
-        type: ACTION_TYPES.RESET_WINNING_ATTRIBUTE
+        type: ACTION_TYPES.SET_ATTRIBUTE
       });
     });
   });
