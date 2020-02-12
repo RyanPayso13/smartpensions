@@ -1,8 +1,7 @@
 import React, { useReducer } from "react";
 import Context from "../../state/context";
 import Container from "react-bootstrap/Container";
-import * as constants from "../../constants/index";
-import { gameReducer } from "../../state/reducers/gameReducer";
+import { gameReducer, initialState } from "../../state/reducers/gameReducer";
 import Row from "react-bootstrap/Row";
 import Navbar from "react-bootstrap/Navbar";
 import Col from "react-bootstrap/Col";
@@ -10,7 +9,7 @@ import ResourceSelect from "../ResourceSelect/ResourceSelect";
 import PlayerCard from "../../containers/PlayerCard/PlayerCard";
 
 function App() {
-  const [state, dispatch] = useReducer(gameReducer, constants.INITIAL_STATE);
+  const [state, dispatch] = useReducer(gameReducer, initialState);
 
   return (
     <Context.Provider value={{ state, dispatch }}>
