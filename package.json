@@ -35,6 +35,6 @@
   },
   "devDependencies": {
     "@react-mock/fetch": "^0.3.0",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.7"
   }
 }
